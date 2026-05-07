@@ -1,12 +1,11 @@
 # pat_format
-Efforts to reverse engineer *.pat* - image format used by textile software made by Nedgraphics.
 
-I've been asked to help recover a bunch (100GB+) of patterns, mostly carpet designs created by this software since early 90s till early 2010s.
+Repository documenting efforts to reverse engineer *.pat* - image format used by textile CAD software made by Nedgraphics.
+I've been asked to help recover a bunch (100GB+) of patterns, mostly carpet designs created by Nedgraphics Texcelle - textile CAD software since early 90s till early 2010s. I couldn't use the original software because of DRM issues - I was unable to move license to a different machine or VM because of fingerprinting and the licensing servers are dead for years (but they can send me an exciting quote for their new subscription service).
 
 ---
 
 The .hexpat files is a pattern file (maybe I'll PR it upstream in the future) decoding that format (WIP).
-
 
 Everything here is speculation however I've successfuly managed to extract some images with a fork of rust's [image-extras](https://github.com/bzdula/image-extras) crate.
 
@@ -15,7 +14,7 @@ So far what this is what I've found out (all values are big endian):
 
 # Header
 
-Starts from `0x0000` and goes (probably) `0x0200`.
+Starts from `0x0000` and goes (probably) to `0x0200` (since they seem to like to pad everything to nearest 512 byte block).
 
 |Offset|Size|Type|Description|
 |---|---|---|---|
@@ -58,11 +57,11 @@ so here if we want to get color of second pixel in an image we need to get `[0x6
 
 # Data block
 
-Data block always start at `0x600` and it's of size `width * real_height` (`real_hight` being encoded height optionally divided by 3 if image is inline encoded).
+Data block always start at `0x600` and it's of size `width * height` (encoded height not "real height").
 
 # Repeated header 
 
-After data ends there is padding with zeros to the nearest 256 byte block and then there is the same header repeated 
+After data ends there is padding with zeros to the nearest 512 byte block and then there is the same header repeated 
 
 # Unknown stuff
 
