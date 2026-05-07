@@ -1,4 +1,4 @@
-# pat_format
+# nedgraphics_pat
 
 Repository documenting efforts to reverse engineer *.pat* - image format used by textile CAD software made by Nedgraphics.
 I've been asked to help recover a bunch (100GB+) of patterns, mostly carpet designs created by Nedgraphics Texcelle - textile CAD software since early 90s till early 2010s. I couldn't use the original software because of DRM issues - I was unable to move license to a different machine or VM because of fingerprinting and the licensing servers are dead for years (but they can send me an exciting quote for their new subscription service).
